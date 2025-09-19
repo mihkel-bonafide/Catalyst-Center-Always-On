@@ -25,7 +25,8 @@ def get_devices():
     response = requests.get(url, headers=leheaders, verify=False)
     print(response.status_code)  
     with open('output.json', 'w') as f:
-        json.dump(response.json(), f, indent=4) # if output.json already exists in your working dir, this will overwrite it
+        # write output to output.json and print device-count to terminal 
+        json.dump(response.json(), f, indent=4) 
         print("Number of devices:", len(response.json().get('response', [])))
 
 
