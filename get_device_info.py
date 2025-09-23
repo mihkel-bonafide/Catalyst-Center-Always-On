@@ -23,12 +23,20 @@ def get_devices():
         }
     # this is your GET request 
     response = requests.get(url, headers=leheaders, verify=False)
+    jason = response.json()
     print(response.status_code)  
-    with open('output.json', 'w') as f:
-        # write output to output.json and print device-count to terminal 
-        json.dump(response.json(), f, indent=4) 
-        print("Number of devices:", len(response.json().get('response', [])))
+    management_ips = [device['managementIpAddress'] for device in jason['response']] 
+    device_ids = [device['id'] for device in jason['response']]  
 
+    with open('output.json', 'w') as output_file:
+        # full output from the GET request
+        json.dump(jason, output_file, indent=4) 
+
+    with open('devices.json', 'w') as dev_file:
+        # just the device IDs and management IPs
+        devices = dict(zip(device_ids, management_ips))
+        json.dump(devices, dev_file, indent=4)
+        
 
 def main():
     get_devices()   
