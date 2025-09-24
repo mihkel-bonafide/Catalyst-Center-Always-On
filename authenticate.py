@@ -8,19 +8,18 @@ Cisco Catalyst Center.
 import requests
 import urllib3
 urllib3.disable_warnings()
+from lehost import auth_url   
 
 def get_token():
     """
     Obtains the access token needed for subsequent API calls for Cisco Catalyst Center.
     """
     # Declare local variables
-    lepath = "https://sandboxdnac2.cisco.com/dna"  # this works with or without that "2" btw, but will generate a different token
     leauth = ("devnetuser", "Cisco123!")
     leheaders = {"Content-Type": "application/json"}    
-    endpoint = "/system/api/v1/auth/token"
-
+    
     # Issue HTTP POST request to specified endpoint
-    response = requests.post(url=lepath + endpoint, auth=leauth, headers=leheaders, verify=False)
+    response = requests.post(url=auth_url, auth=leauth, headers=leheaders, verify=False)
 
     # If successful, print token. Else, raise HTTPError with relevant info 
     response.raise_for_status()
