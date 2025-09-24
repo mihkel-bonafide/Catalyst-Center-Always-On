@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Author: Mihkel Gardner
+Author: MPG
 Purpose: Use the Python requests library to obtain an API access-token from 
 Cisco Catalyst Center. 
 """
