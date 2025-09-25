@@ -25,8 +25,8 @@ def get_devices():
     response = requests.get(url, headers=leheaders, verify=False)
     jason = response.json()
     print(response.status_code)  
-    management_ips = [device['managementIpAddress'] for device in jason['response']] 
-    device_ids = [device['id'] for device in jason['response']]  
+    management_ips = [iterator['managementIpAddress'] for iterator in jason['response']] 
+    device_ids = [iterator['id'] for iterator in jason['response']]  
 
     with open('output.json', 'w') as output_file:
         # full output from the GET request
